@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var animationAmount = 1.0
+    @State private var enabled = false
     var body: some View {
         // attach animation modifier to a view
         
@@ -34,6 +35,8 @@ struct ContentView: View {
          */
         
         // explicitly animating state changes
+        
+        /*
         Button("Tap Me") {
             withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
                 animationAmount += 360
@@ -47,7 +50,17 @@ struct ContentView: View {
         .degrees(animationAmount),
                               axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
        )
+         */
         
+        Button("tap me!") {
+            enabled.toggle()
+        }
+        .frame(width: 200, height: 200)
+        .background(enabled ? .blue : .red)
+        .animation(nil, value: enabled)
+        .foregroundColor(.white)
+        .clipShape(RoundedRectangle(cornerRadius: enabled ? 60 : 0))
+        .animation(.interpolatingSpring(stiffness: 10, damping: 1), value: enabled)
     }
 }
 
